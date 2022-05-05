@@ -11,7 +11,7 @@ const appSlice = createSlice({
             state.headline = action.payload
         },
         addRows(state, action) {
-            state.rows = [...state.rows, action.payload]
+            state.rows = [...state.rows, ...action.payload]
         }
     }
 })

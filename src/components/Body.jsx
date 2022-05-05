@@ -13,8 +13,8 @@ const Body = () => {
 
     useEffect(() => {
         persons.getAllPersons()
-
             .then(res => {
+                const allRows = []
                 for (let i = 0; i <= res.length - 1; i++) {
 
                     const oneRow = {
@@ -24,10 +24,11 @@ const Body = () => {
                         title: res[i].email,
                         stat: res[i].email,
                     }
+                    allRows.push(oneRow)
 
-                    const addAppRows = () => dispatch((addRows(oneRow)))
-                    addAppRows(oneRow)
                 }
+                const addAppRows = () => dispatch((addRows(allRows)))
+                addAppRows(allRows)
             })
 
     }, []);

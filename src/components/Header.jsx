@@ -10,7 +10,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        persons.getPerson(123)
+        persons.getPerson(6)
 
             .then(res => {
                 const name = res.name
