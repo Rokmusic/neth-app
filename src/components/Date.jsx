@@ -9,9 +9,6 @@ const DatePickerClass = () => {
     const app = useSelector(state => state.app);
     const dispatch = useDispatch();
 
-    const [value, setState] = useState(app.date)
-
-
     const addDateToSlice = (value) => dispatch((addDateToState(value)))
 
     return (
@@ -19,7 +16,6 @@ const DatePickerClass = () => {
             type="date-range"
             value={app.date}
             onChange={({ value}) => addDateToSlice(value)}
-            onBlur={console.log(value)}
             leftSide={[IconForward, IconBackward]}
             rightSide={['туда', 'обратно']}
         />
