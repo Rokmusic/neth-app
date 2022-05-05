@@ -1,4 +1,3 @@
-import {TableColumn} from "@consta/uikit/Table";
 import axios from 'axios';
 
 
@@ -19,7 +18,7 @@ class RowService {
 }
 export const persons = new RowService()
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns = [
     {
         title: '#',
         accessor: 'id',

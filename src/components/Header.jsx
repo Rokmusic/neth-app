@@ -1,8 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Search from "../components/Search";
 import {useDispatch, useSelector} from "react-redux";
 import {changeHeadline} from "../appSlice";
 import {persons} from "../api";
+import {Button} from "@consta/uikit/Button";
+import DatePickerClass from "./Date";
 
 const Header = () => {
 
@@ -35,13 +37,14 @@ const Header = () => {
                 <h2 id="h2">{app.headline}</h2>
                 <div>
                     <Search/>
-                    <button className="files">files</button>
-                    <button className="info">info</button>
-                    <button className="burger">burger</button>
+                    <Button className="files" label={'files'}></Button>
+                    <Button className="info" label={'info'}></Button>
+                    <Button className="burger" label={'burger'}></Button>
+
                 </div>
             </div>
             <div>
-                Date
+                {<DatePickerClass/>}
             </div>
             <div>
                 <label htmlFor="inputName">Наименование</label>

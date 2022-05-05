@@ -4,7 +4,8 @@ const appSlice = createSlice({
     name: 'app',
     initialState: {
         headline: '',
-        rows: []
+        rows: [],
+        date: null
     },
     reducers: {
         changeHeadline(state, action) {
@@ -12,9 +13,12 @@ const appSlice = createSlice({
         },
         addRows(state, action) {
             state.rows = [...state.rows, ...action.payload]
+        },
+        addDateToState(state, action) {
+            state.date = action.payload
         }
     }
 })
 
-export const {changeHeadline, addRows} = appSlice.actions
+export const {changeHeadline, addRows, addDateToState} = appSlice.actions
 export default appSlice.reducer

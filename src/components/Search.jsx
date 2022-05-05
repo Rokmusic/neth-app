@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Button} from "@consta/uikit/Button";
 
 
 export default class Search extends React.Component {
@@ -8,7 +8,7 @@ export default class Search extends React.Component {
             <input type="search"
                    className="search-input"
             />
-            <button className="search-btn">Поиск</button>
+            <Button className="search-btn" label={'Поиск'}></Button>
             </div>
         }
 }
