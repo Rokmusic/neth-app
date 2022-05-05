@@ -1,72 +1,45 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Table } from '@consta/uikit/Table';
-import {columns, newData, persons} from '../data';
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import * as actions from "../actions";
-import {addRowsTable} from "../actions";
+import {columns, newData, persons} from '../api';
+import {useDispatch, useSelector} from "react-redux";
+import {addRows} from "../appSlice";
 
 
 
-const Body = ({rows, addRowTable, addRowsTable}) => {
+const Body = () => {
 
-    window.onload = function() {
-        addRowsTable(newData)
-    };
+    const app = useSelector(state => state.app);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        persons.getAllPersons()
+
+            .then(res => {
+                for (let i = 0; i <= res.length - 1; i++) {
+
+                    const oneRow = {
+                        id: res[i].id,
+                        name: res[i].name,
+                        article: res[i].body,
+                        title: res[i].email,
+                        stat: res[i].email,
+                    }
+
+                    const addAppRows = () => dispatch((addRows(oneRow)))
+                    addAppRows(oneRow)
+                }
+            })
+
+    }, []);
 
     return (
         <div>
-            <button
-                onClick={addRowTable}
-            >addRow
-            </button>
                 <Table
                     columns={columns}
-                    rows={rows}
+                    rows={app.rows}
                 />
         </div>
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        rows: state,
-        rowsReducer: state
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    const {addRowTable, addRowsTable} = bindActionCreators(actions, dispatch);
-
-    return {
-
-        addRowTable: (rows, value) => {
-            const newRow = []
-            persons.getPerson(25)
-
-                .then(res => {
-
-                    const oneRow = {
-                            id: res.id,
-                            name: res.name,
-                            article: res.body,
-                            title: res.email,
-                            stat: res.email,
-                        }
-                    newRow.push(oneRow)
-
-                    value = newRow
-                    addRowTable(value)
-                })
-
-        },
-        addRowsTable: (rows, value) => {
-
-                    value = newData
-                    addRowsTable(value)
-
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Body)
+export default Body

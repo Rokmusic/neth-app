@@ -1,7 +1,6 @@
 import {TableColumn} from "@consta/uikit/Table";
 import axios from 'axios';
 
-export const headline = 'm1300 таз хозяюшк'
 
 class RowService {
 
@@ -18,45 +17,7 @@ class RowService {
         return this.axiosGet(`https://jsonplaceholder.typicode.com/comments/${id}`);
     }
 }
-
 export const persons = new RowService()
-
-export const newData = []
-
-persons.getAllPersons()
-
-    .then(res => {
-        for (let i = 0; i <= res.length - 1; i++) {
-
-            const oneRow = {
-                id: res[i].id,
-                name: res[i].name,
-                article: res[i].body,
-                title: res[i].email,
-                stat: res[i].email,
-            }
-            newData.push(oneRow)
-        }
-    })
-
-const rows = [
-    {
-        id: '1',
-        name: 'defName 1',
-        article: 'defArticle 1',
-        title: 'defTitle 1',
-        stat: 'defStat 1'
-    },
-    {
-        id: '2',
-        name: 'defName 2',
-        article: 'defArticle 2',
-        title: 'defTitle 2',
-        stat: 'defStat 2'
-    }
-]
-
-
 
 const columns: TableColumn<typeof rows[number]>[] = [
     {
@@ -101,4 +62,4 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ];
 
 
-export {rows, columns}
+export {columns}

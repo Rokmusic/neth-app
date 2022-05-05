@@ -1,16 +1,38 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Search from "../components/Search";
-import {connect} from "react-redux";
-import * as actions from "../actions"
-import {bindActionCreators} from "redux";
+import {useDispatch, useSelector} from "react-redux";
+import {changeHeadline} from "../appSlice";
+import {persons} from "../api";
 
-const Header = ({headline, changeHeadline}) => {
+const Header = () => {
+
+    const app = useSelector(state => state.app);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        persons.getPerson(123)
+
+            .then(res => {
+                const name = res.name
+
+                const addTextHeadline = () => dispatch((changeHeadline(name)))
+                addTextHeadline(name)
+            })
+
+    }, []);
+
+    function funcChangeHeadline() {
+        const inputName = document.getElementById('inputName')
+        const inputText = inputName.value
+        const addTextHeadline = () => dispatch((changeHeadline(inputText)))
+        addTextHeadline(inputText)
+    }
 
     return (
 
         <div className="header-container">
             <div>
-                <h2 id="h2">{headline}</h2>
+                <h2 id="h2">{app.headline}</h2>
                 <div>
                     <Search/>
                     <button className="files">files</button>
@@ -24,8 +46,8 @@ const Header = ({headline, changeHeadline}) => {
             <div>
                 <label htmlFor="inputName">Наименование</label>
                 <input id="inputName" type="text"
-                       value={headline}
-                       onInput={changeHeadline}
+                       value={app.headline}
+                       onChange={funcChangeHeadline}
                 />
                 <input type="text"/>
                 <input type="text"/>
@@ -34,21 +56,5 @@ const Header = ({headline, changeHeadline}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        headline: state,
-    }
-}
 
-const mapDispatchToProps = (dispatch) => {
-    const {changeHeadline} = bindActionCreators(actions, dispatch);
-    return {
-        changeHeadline: (inputName, value) => {
-            inputName = document.getElementById('inputName')
-            value = inputName.value;
-            changeHeadline(value);
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default Header

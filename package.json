@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@consta/uikit": "^3.20.0",
+    "@reduxjs/toolkit": "^1.8.1",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-knobs": "^6.4.0",
     "@testing-library/jest-dom": "^5.16.4",
