@@ -24,8 +24,7 @@ const Body = () => {
     const app = useSelector(state => state.app);
     const dispatch = useDispatch();
     const [contextMenuState, setContextMenuState] = useState({});
-    const [buttonState, setButtonState] = useState(false);
-    // const [rows, setRows] = useState([...app.rows]);
+    const [buttonState, setButtonState] = useState({});
 
     const counter = 1
 
@@ -148,7 +147,7 @@ const Body = () => {
                                     addIdToState(value)
                                 }
 
-                                const editTable = (t) => {
+                                const editRowButton = (t) => {
                                     const addRowUpToState = () => dispatch((addRowUp(value)))
                                     const addRowLowToState = () => dispatch((addRowLow(value)))
                                     const deleteRowInState = () => dispatch((deleteRow(index)))
@@ -156,13 +155,14 @@ const Body = () => {
                                     const upCounterInState = () => dispatch((upCounter(counter)))
 
 
-                                    const index = [...app.rows].findIndex(id => id.id === app.id)
+                                    const index = [...app.rows].findIndex(el => el.id === app.id)
                                     const value = [...newArr, index]
 
                                     switch(t.target.innerHTML) {
                                         case actionItems[0].name:
                                             addRowUpToState(value)
                                             upCounterInState(counter)
+
                                             break
                                         case actionItems[1].name:
                                             addRowLowToState(value)
@@ -180,7 +180,6 @@ const Body = () => {
 
                                 return (
                                     <>
-                                        {buttonState && (
                                         <Button
                                             ref={menuProps.ref}
                                             size="xs"
@@ -189,7 +188,6 @@ const Body = () => {
                                             onlyIcon
                                             onClick={setMenuState(true)}
                                         />
-                                        )}
                                         {menuProps.isOpen && (
                                             <ContextMenu
                                                 anchorRef={menuProps.ref}
@@ -200,7 +198,7 @@ const Body = () => {
                                                 getGroupId={(item) => item.group}
                                                 getLeftSideBar={({ icon: Icon }) => <Icon view="secondary" size="xs" />}
                                                 getOnClick={clickButton(row.id)}
-                                                onClick={editTable}
+                                                onClick={editRowButton}
                                                 direction="downLeft"
                                                 possibleDirections={['upLeft', 'downLeft']}
                                                 onClickOutside={setMenuState(false)}
@@ -245,16 +243,49 @@ const Body = () => {
             })
     }, []);
 
-    const buttonHover = (e) => {
-        setButtonState(!buttonState)
-    }
+
+
+    // setButtonState((prevState) => {
+    //
+    //     if (prevState[id]) {
+    //
+    //         return {
+    //             ...prevState,
+    //             [id]: {
+    //                 ...prevState[id],
+    //                 isOpen,
+    //             },
+    //         };
+    //     }
+    //
+    //     return {
+    //         ...prevState,
+    //         [id]: {
+    //             ref: React.createRef(HTMLButtonElement),
+    //             isOpen,
+    //         },
+    //     };
+    // });
+    //
+    // const hoverProps = buttonState[id];
+    //
+    // if (hoverProps === undefined) {
+    //     setHoverState(false)();
+    //
+    //     return null;
+    // }
+
 
     return (
         <div>
                 <Table
                     columns={columns}
                     rows={app.rows}
-                    onRowHover={({ e}) => buttonHover(e)}
+                    // onClickOutside={setHoverState(false)}
+                    // onRowHover={({ id}) => setButtonState(id)}
+                    // onMouseLeave={setHoverState(false)}
+                    // onMouseEnter={setHoverState(true)}
+                    // getAdditionalClassName={({ row}) => testClass(row)}
                 />
 
         </div>

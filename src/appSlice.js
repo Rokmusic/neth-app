@@ -8,7 +8,9 @@ const appSlice = createSlice({
         rows: [],
         date: null,
         id: 0,
-        counter: 0
+        counter: 0,
+        status: '',
+        zoneType: ''
     },
     reducers: {
         changeCounter(state, action) {
@@ -55,9 +57,28 @@ const appSlice = createSlice({
         addId(state, action) {
             state.id = action.payload
         },
+        changeStat(state, action) {
+            state.status = action.payload
+        },
+        changeZone(state, action) {
+            state.zoneType = action.payload
+        },
     }
 })
 
+export const {
+    upCounter,
+    changeCounter,
+    changeHeadline,
+    addRows,
+    addDateToState,
+    addRowUp,
+    addRowLow,
+    deleteRow,
+    editRow,
+    addId,
+    changeStat,
+    changeZone
+} = appSlice.actions
 
-export const {upCounter, changeCounter, changeHeadline, addRows, addDateToState, addRowUp, addRowLow, deleteRow, editRow, addId} = appSlice.actions
 export default appSlice.reducer

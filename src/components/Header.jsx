@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import Search from "../components/Search";
 import {useDispatch, useSelector} from "react-redux";
-import {changeHeadline} from "../appSlice";
+import {changeHeadline, changeStat, changeZone} from "../appSlice";
 import {persons} from "../api";
 import {Button} from "@consta/uikit/Button";
 import DatePickerClass from "./Date";
@@ -30,6 +30,20 @@ const Header = () => {
         addTextHeadline(inputText)
     }
 
+    // function changeStatus () {
+    //     const inputName = document.getElementById('inputStatus')
+    //     const inputText = inputName.value
+    //     const addStatusInState = () => dispatch((changeStat(inputText)))
+    //     addStatusInState(inputText)
+    // }
+    //
+    // function changeZone () {
+    //     const inputName = document.getElementById('inputZone')
+    //     const inputText = inputName.value
+    //     const addZoneInState = () => dispatch((changeZone(inputText)))
+    //     addZoneInState(inputText)
+    // }
+
     return (
 
         <div className="header-container">
@@ -52,8 +66,12 @@ const Header = () => {
                        value={app.headline}
                        onChange={funcChangeHeadline}
                 />
-                <input type="text"/>
-                <input type="text"/>
+                <input id="inputStatus" type="text"
+                       value={app.status}
+                />
+                <input id="inputZone" type="text"
+                       value={app.zoneType}
+                />
             </div>
         </div>
     );
