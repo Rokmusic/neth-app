@@ -13,3 +13,7 @@
 button {
     height: 30px;
 }
+
+.d-none {
+    display: none;
+}

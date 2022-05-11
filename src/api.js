@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {Button} from "@consta/uikit/Button";
+import {ContextMenu} from "@consta/uikit/ContextMenu";
 
 
 class RowService {
@@ -18,47 +20,4 @@ class RowService {
 }
 export const persons = new RowService()
 
-const columns = [
-    {
-        title: '#',
-        accessor: 'id',
-        align: 'center',
-        width: 100,
-        sortable: true,
-    },
-    {
-        title: 'Вид этапа',
-        accessor: 'name',
-        sortable: true,
-        width: 300,
 
-    },
-    {
-        title: 'Выходное изделие',
-        'columns': [
-            {
-                title: 'Артикул',
-                accessor: 'article',
-                sortable: true,
-
-            },
-            {
-                title: 'номенклатура',
-                accessor: 'title',
-                sortable: true,
-            },
-            {
-                title: 'Характеристика1',
-                accessor: 'stat',
-                sortable: true,
-
-            },
-        ]
-    },
-
-
-
-];
-
-
-export {columns}
