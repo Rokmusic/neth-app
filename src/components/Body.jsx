@@ -11,14 +11,12 @@ import {
     changeCounter,
     deleteRow,
     editRow,
-    lowCounter,
     upCounter
 } from "../appSlice";
 import {IconKebab} from "@consta/uikit/IconKebab";
 import {ContextMenu} from "@consta/uikit/ContextMenu";
 import {IconAdd} from "@consta/uikit/IconAdd";
 import {IconTrash} from "@consta/uikit/IconTrash";
-import {IconAddToComparison} from "@consta/uikit/IconAddToComparison";
 import {IconEdit} from "@consta/uikit/IconEdit";
 
 
@@ -26,6 +24,7 @@ const Body = () => {
     const app = useSelector(state => state.app);
     const dispatch = useDispatch();
     const [contextMenuState, setContextMenuState] = useState({});
+    const [buttonState, setButtonState] = useState(false);
     // const [rows, setRows] = useState([...app.rows]);
 
     const counter = 1
@@ -52,7 +51,7 @@ const Body = () => {
         {
             type: 'remove',
             name: 'Удалить',
-            group: 2,
+            group: 3,
             icon: IconTrash,
         },
     ];
@@ -181,15 +180,16 @@ const Body = () => {
 
                                 return (
                                     <>
+                                        {buttonState && (
                                         <Button
                                             ref={menuProps.ref}
                                             size="xs"
                                             view="clear"
                                             iconLeft={IconKebab}
                                             onlyIcon
-                                            // getOnClick={funcCounter}
                                             onClick={setMenuState(true)}
                                         />
+                                        )}
                                         {menuProps.isOpen && (
                                             <ContextMenu
                                                 anchorRef={menuProps.ref}
@@ -199,7 +199,6 @@ const Body = () => {
                                                 getLabel={(item) => item.name}
                                                 getGroupId={(item) => item.group}
                                                 getLeftSideBar={({ icon: Icon }) => <Icon view="secondary" size="xs" />}
-                                                // getOnClick={handleContextMenuClick(setMenuState(false), row.id)}
                                                 getOnClick={clickButton(row.id)}
                                                 onClick={editTable}
                                                 direction="downLeft"
@@ -214,23 +213,12 @@ const Body = () => {
 
                     ]
                 },
-
-
             ]
         },
 
-
-
     ];
 
-    // useEffect(() => {
-    //     console.log(app.rows.length)
-    //
-    // }, [])
-
     useEffect(() => {
-
-
 
         persons.getAllPersons()
             .then(res => {
@@ -244,7 +232,6 @@ const Body = () => {
                         article: res[i].body,
                         title: res[i].email,
                         stat: res[i].email,
-                        // actions: addButton(res[i].name, res, addButton)
                     }
                     allRows.push(oneRow)
                 }
@@ -255,16 +242,19 @@ const Body = () => {
                 const newCounter = allRows[arrLength].id + 1
                 const changeCounterInState = () => dispatch((changeCounter(newCounter)))
                 changeCounterInState(newCounter)
-
             })
-
     }, []);
+
+    const buttonHover = (e) => {
+        setButtonState(!buttonState)
+    }
 
     return (
         <div>
                 <Table
                     columns={columns}
                     rows={app.rows}
+                    onRowHover={({ e}) => buttonHover(e)}
                 />
 
         </div>
