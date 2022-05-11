@@ -130,7 +130,6 @@ const Body = () => {
                                 const newArr = []
 
                                 const clickButton = (id) => {
-
                                     persons.getPerson(app.counter)
                                         .then(res => {
                                             const newRow = {
@@ -162,10 +161,11 @@ const Body = () => {
                                         case actionItems[0].name:
                                             addRowUpToState(value)
                                             upCounterInState(counter)
-
+                                            setContextMenuState(false)
                                             break
                                         case actionItems[1].name:
                                             addRowLowToState(value)
+                                            setContextMenuState(false)
                                             upCounterInState(counter)
                                             break
                                         case actionItems[2].name:
@@ -199,8 +199,8 @@ const Body = () => {
                                                 getLeftSideBar={({ icon: Icon }) => <Icon view="secondary" size="xs" />}
                                                 getOnClick={clickButton(row.id)}
                                                 onClick={editRowButton}
-                                                direction="downLeft"
-                                                possibleDirections={['upLeft', 'downLeft']}
+                                                // direction="downLeft"
+                                                // possibleDirections={['upLeft', 'downLeft']}
                                                 onClickOutside={setMenuState(false)}
                                             />
                                         )}
@@ -277,7 +277,7 @@ const Body = () => {
 
 
     return (
-        <div>
+        <div className="container-table">
                 <Table
                     columns={columns}
                     rows={app.rows}
