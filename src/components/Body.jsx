@@ -180,14 +180,16 @@ const Body = () => {
 
                                 return (
                                     <>
-                                        <Button
-                                            ref={menuProps.ref}
-                                            size="xs"
-                                            view="clear"
-                                            iconLeft={IconKebab}
-                                            onlyIcon
-                                            onClick={setMenuState(true)}
-                                        />
+                                        {buttonState && (
+                                            <Button
+                                                ref={menuProps.ref}
+                                                size="xs"
+                                                view="clear"
+                                                iconLeft={IconKebab}
+                                                onlyIcon
+                                                onClick={setMenuState(true)}
+                                            />
+                                        )}
                                         {menuProps.isOpen && (
                                             <ContextMenu
                                                 anchorRef={menuProps.ref}
@@ -199,8 +201,6 @@ const Body = () => {
                                                 getLeftSideBar={({ icon: Icon }) => <Icon view="secondary" size="xs" />}
                                                 getOnClick={clickButton(row.id)}
                                                 onClick={editRowButton}
-                                                // direction="downLeft"
-                                                // possibleDirections={['upLeft', 'downLeft']}
                                                 onClickOutside={setMenuState(false)}
                                             />
                                         )}
@@ -245,35 +245,15 @@ const Body = () => {
 
 
 
-    // setButtonState((prevState) => {
-    //
-    //     if (prevState[id]) {
-    //
-    //         return {
-    //             ...prevState,
-    //             [id]: {
-    //                 ...prevState[id],
-    //                 isOpen,
-    //             },
-    //         };
-    //     }
-    //
-    //     return {
-    //         ...prevState,
-    //         [id]: {
-    //             ref: React.createRef(HTMLButtonElement),
-    //             isOpen,
-    //         },
-    //     };
-    // });
-    //
-    // const hoverProps = buttonState[id];
-    //
-    // if (hoverProps === undefined) {
-    //     setHoverState(false)();
-    //
-    //     return null;
-    // }
+
+    const inHover = (id) => {
+        if (!buttonState || id) {
+            setButtonState(true)
+        } else if (id === undefined) {
+            setButtonState(false)
+            // setContextMenuState(false)
+        }
+    }
 
 
     return (
@@ -281,11 +261,7 @@ const Body = () => {
                 <Table
                     columns={columns}
                     rows={app.rows}
-                    // onClickOutside={setHoverState(false)}
-                    // onRowHover={({ id}) => setButtonState(id)}
-                    // onMouseLeave={setHoverState(false)}
-                    // onMouseEnter={setHoverState(true)}
-                    // getAdditionalClassName={({ row}) => testClass(row)}
+                    onRowHover={({ e, id}) => inHover(id)}
                 />
 
         </div>
