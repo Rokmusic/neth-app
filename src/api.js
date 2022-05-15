@@ -1,6 +1,4 @@
 import axios from 'axios';
-import {Button} from "@consta/uikit/Button";
-import {ContextMenu} from "@consta/uikit/ContextMenu";
 
 
 class RowService {
