@@ -70,7 +70,6 @@ const Body = () => {
             accessor: 'name',
             sortable: true,
             width: 300,
-
         },
         {
             title: 'Выходное изделие',
@@ -137,7 +136,9 @@ const Body = () => {
                                         stat: res.email,
                                     }
                                     newArr.push(newRow)
-                                })
+                                }).catch(reason => {
+                                    console.log(reason)
+                            })
                             const value = id
                             const addIdToState = () => dispatch((addId(value)))
                             addIdToState(value)
@@ -235,6 +236,7 @@ const Body = () => {
                         article: res[i].body,
                         title: res[i].email,
                         stat: res[i].email,
+                        // key: `${res[i].id.toString()}`
                     }
                     allRows.push(oneRow)
                 }
@@ -276,15 +278,16 @@ const Body = () => {
     return (
         <div>
             <Table
-                className={classes.table}
+                // className={classes.table}
                 columns={columns}
+
                 rows={app.rows}
+
                 size="m"
                 borderBetweenRows
                 borderBetweenColumns
                 // onRowHover={({id}) => inHover(id)}
             />
-
         </div>
     );
 }

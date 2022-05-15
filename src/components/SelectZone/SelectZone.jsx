@@ -4,6 +4,7 @@ import {changeStat, changeZone} from "../../appSlice";
 import {useDispatch, useSelector} from "react-redux";
 
 import classes from "./SelectZone.module.css";
+import {isEmpty} from "@consta/uikit/__internal__/cjs-src/utils/object";
 
 const SelectZone = () => {
 
@@ -33,15 +34,19 @@ const SelectZone = () => {
 
     function clearButton () {
         const value = {}
-        const changeZoneToState = () => dispatch((changeZone(value)))
-        changeZoneToState(value)
+        if (isEmpty(app.zoneType)) {
+            return null
+        } else {
+            const changeZoneToState = () => dispatch((changeZone(value)))
+            changeZoneToState(value)
+        }
     }
 
 
     return (
         <div className={classes.container}>
             <Select
-                className={classes.Select}
+                // className={classes.Select}
                 placeholder="Выберите Значение"
                 label="Тип зоны"
                 labelPosition="top"

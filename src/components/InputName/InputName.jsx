@@ -4,6 +4,7 @@ import classes from "./InputName.module.css"
 import {changeHeadline, changeStat} from "../../appSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {persons} from "../../api";
+import {isEmpty} from "@consta/uikit/__internal__/cjs-src/utils/object";
 
 const InputName = () => {
     const app = useSelector(state => state.app);
@@ -30,8 +31,12 @@ const InputName = () => {
 
     function clearButton () {
         const value = ''
-        const clearHeadline = () => dispatch((changeHeadline(value)))
-        clearHeadline(value)
+        if (app.headline === '') {
+            return null
+        } else {
+            const clearHeadline = () => dispatch((changeHeadline(value)))
+            clearHeadline(value)
+        }
     }
 
     return (

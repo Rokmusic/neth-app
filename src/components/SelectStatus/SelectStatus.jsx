@@ -4,6 +4,7 @@ import {render} from "react-dom";
 import {changeStat} from "../../appSlice";
 import {useDispatch, useSelector} from "react-redux";
 import classes from "./SelectStatus.module.css"
+import {isEmpty} from "@consta/uikit/__internal__/cjs-src/utils/object";
 
 const SelectStatus = () => {
 
@@ -33,8 +34,13 @@ const SelectStatus = () => {
 
     function clearButton () {
         const value = {}
-        const changeStatusToState = () => dispatch((changeStat(value)))
-        changeStatusToState(value)
+        if (isEmpty(app.status)) {
+            return null
+        } else {
+            const changeStatusToState = () => dispatch((changeStat(value)))
+            changeStatusToState(value)
+
+        }
     }
 
     return (
