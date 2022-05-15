@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {DatePicker} from "@consta/uikit/DatePickerCanary";
-import {IconForward} from "@consta/uikit/IconForward";
-import {IconBackward} from "@consta/uikit/IconBackward";
 import {useDispatch, useSelector} from "react-redux";
-import {addDateToState} from "../appSlice";
+import {addDateToState} from "../../appSlice";
+import {IconCalendar} from "@consta/uikit/IconCalendar";
+import classes from "./Date.module.css"
 
 const DatePickerClass = () => {
     const app = useSelector(state => state.app);
@@ -13,11 +13,13 @@ const DatePickerClass = () => {
 
     return (
         <DatePicker
+            className={classes.datePicker}
+            label="Период действия" labelPosition="top"
             type="date-range"
+            rightSide={[IconCalendar, IconCalendar]}
+            size="s"
             value={app.date}
             onChange={({ value}) => addDateToSlice(value)}
-            leftSide={[IconForward, IconBackward]}
-            rightSide={['туда', 'обратно']}
         />
     );
 

@@ -1,0 +1,36 @@
+.container {
+    position: relative;
+    display: flex;
+    width: 30%;
+}
+
+.Select {
+    cursor: pointer;
+}
+
+.clearButton {
+    padding: 3px;
+    display: block;
+    position: absolute;
+    bottom: calc(50% - 19px);
+    right: calc(30px + 1%);
+    z-index: 1;
+    cursor: pointer;
+    width: 9px;
+    height: 9px;
+    --weight: 0.5px;
+    --aa: 1px; /* anti-aliasing */
+    --color: grey;
+    border-radius: 1px;
+    background:
+            linear-gradient(45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa))),
+            linear-gradient(-45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa)));
+
+}
+
+.clearButton:hover {
+    --color: #0078d2;
+    padding: 5px;
+}
+
+

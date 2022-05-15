@@ -1,0 +1,6 @@
+.container {
+    position: relative;
+    display: flex;
+    width: 25%;
+}
+

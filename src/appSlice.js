@@ -9,8 +9,8 @@ const appSlice = createSlice({
         date: null,
         id: 0,
         counter: 0,
-        status: '',
-        zoneType: ''
+        status: {},
+        zoneType: {}
     },
     reducers: {
         changeCounter(state, action) {
